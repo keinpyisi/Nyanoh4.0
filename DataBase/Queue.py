@@ -434,12 +434,12 @@ class DBQueue:
         mydb.commit()
         mycursor.close()
         mydb.close()
-    def role_search(self,serverid):
+    def unrole_search(self,serverid):
         #Role and Server ID is reverse here
         """Return the content of a server's queue"""
         mydb = self.dbConnection.getConnection()
         mycursor = mydb.cursor()
-        query = f"SELECT server_id FROM `role-channel` WHERE `role_id`= '"+ str(serverid) +"' LIMIT 1; "
+        query = f"SELECT server_id FROM `unrole-channel` WHERE `role_id`= '"+ str(serverid) +"' LIMIT 1; "
         
         mycursor.execute(query)
         result = mycursor.fetchall()

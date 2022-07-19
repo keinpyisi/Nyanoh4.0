@@ -20,7 +20,7 @@ from DataBase.Server import DBServer
 from DataBase.Queue import DBQueue
 
 ROOT_DIR = os.path.dirname(os.path.abspath("main.py"))
-
+from discord.utils import get
 
 class createEmojiList:
     def __init__(self, emojiList):
@@ -140,6 +140,14 @@ async def on_ready():
     #     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name =random.choice("abcde")))     
 @bot.event
 async def on_member_join(member):
+    roletoadd=DBQueue(bot.dbConnection).unrole_search(member.guild.id ) 
+                
+    this_role = get(member.guild.roles, id=int(roletoadd[0][0]))
+
+                
+                
+    await member.add_roles(this_role)
+    print("HERE")
     image = ImageCaptcha(width = 280, height = 90)
     
     characters = string.ascii_letters + string.digits
@@ -156,6 +164,7 @@ async def on_member_join(member):
     DBQueue(bot.dbConnection).capcha_add(str(password),str(member.id),str(member.guild.id))
       
     DBQueue(bot.dbConnection).unverify_add(str(member.guild.id),str(member.id),str(member.name))
+    
     
     await member.send(embed=embed,file=file)   
 
