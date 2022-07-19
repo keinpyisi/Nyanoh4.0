@@ -1,70 +1,46 @@
-# Short API Documentation
+# Nyanoh Documentation
 
-This is an example of Short URL application providing a REST
-API to use.
+This is an example of Nyanoh Music Bot with Lavalink to use.
 
-## Website URL
-https://vocaloidnationmm.com.pl/
+## Invite Link URL
+https://discord.com/oauth2/authorize?client_id=906070538278043668&permissions=70282305&scope=bot
 
-## Website UI
-<img src="https://github.com/keinpyisi/ShortURL/blob/main/screenshots/ui%20ss.png" />
+## Nyanoh Stats
+<img src="https://github.com/keinpyisi/Nyanoh4.0/raw/main/Screenshots/Screen%20Shot%202022-07-19%20at%2016.18.19.png" />
 
-<img src="https://github.com/keinpyisi/ShortURL/blob/main/screenshots/feature%20ss.png" />
 
 ## 🎭 Features
-- [x] URL Shortner
-- [x] Administration Panel
-- [x] Advanced API System
-- [x] Easy to use
-- [x] Easy to Install
-- [x] Unlimited API Request
+- [x] Youtube Music
+- [x] Spotify
+- [x] Deezer
+- [x] Soundcloud
+- [x] Server Verify
+- [x] Extra: Nyanoh Welcome Sound
+- [x] Lyrics 
+
 
 ### Requirements
-    php 8.0
-    laravel 9.0
-    Postman
+    Python v3.7.13
+    MySQL
+    LavaLink
     
+## Command List
+<img src="https://raw.githubusercontent.com/keinpyisi/Nyanoh4.0/main/Screenshots/Screen%20Shot%202022-07-19%20at%2016.18.39.png" />
 
 ### Install
 
-`git clone https://github.com/keinpyisi/ShortURL`
+`git clone https://github.com/keinpyisi/Nyanoh4.0`
 
-    composer install
+    1. Install Lavalink: https://dsharpplus.github.io/articles/audio/lavalink/setup.html
  
-    copy .env
+    2. Run MySQL Script in Scripts
  
-    php artisan key:generate
+    3. Run python -m pip install -r requirement.txt
  
-    php artisan migrate
+    4. Edit configuration.json with your own tokens and settings
  
-    php artisan serve
-
-### Request
-
-`api/shortener/`
-
-    https://vocaloidnationmm.com.pl/api/shortener
-
-### Usuage
-
-    Content-Type: x-www-form-urlencoded
-    original_url : https://www.youtube.com/
+    5. python main.py
 
 
-### Response
-
-    HTTP/1.1 202 OK
-    Status: 202 OK
-    Connection: keep-alive
-    Content-Type: application/json
-
-    {
-        "original": "https://www.youtube.com/",
-        "short_url": "https://vocaloidnationmm.com.pl/dXjwcg"
-    }
-
-## Screen Shot
-
-<img src="https://github.com/keinpyisi/ShortURL/blob/main/screenshots/api%20ss.png"  height="500"/>
 
 
