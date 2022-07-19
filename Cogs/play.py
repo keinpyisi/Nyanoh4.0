@@ -17,7 +17,8 @@ from Tools.Check import Check
 
 from urllib.parse import urlparse, parse_qs
 from contextlib import suppress
-
+import os
+ROOT_DIR = os.path.dirname(os.path.abspath("main.py"))
 
 def video_id(url, ignore_playlist=False):
     # Examples:
@@ -234,7 +235,7 @@ async def noResultFound(self, ctx):
 class CogPlay(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        with open("/home/Nyanoh-Snake/configuration.json", "r") as config:
+        with open(ROOT_DIR+"/configuration.json", "r") as config:
             data = json.load(config)
             self.playlistLimit = int(data.get("playlistLimit", 15))
             # 0 is nolimit

@@ -3,6 +3,9 @@ from mysql.connector import Error
 from mysql.connector import pooling
 
 import json
+import os
+
+ROOT_DIR = os.path.dirname(os.path.abspath("main.py"))
 
 
 class DBConnection:
@@ -10,7 +13,7 @@ class DBConnection:
 
     def __init__(self):
         # if self.poolConnection is None:
-        with open("/home/Nyanoh-Snake/configuration.json", "r") as config:
+        with open(ROOT_DIR+"/configuration.json", "r") as config:
             data = json.load(config)
 
         self.MySQLHost = data["MySQLHost"]

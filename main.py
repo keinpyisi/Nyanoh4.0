@@ -15,9 +15,12 @@ import string
 # Import the following modules
 from captcha.image import ImageCaptcha
 from Tools.Utils import Utils
-
+import os
 from DataBase.Server import DBServer
 from DataBase.Queue import DBQueue
+
+ROOT_DIR = os.path.dirname(os.path.abspath("main.py"))
+
 
 class createEmojiList:
     def __init__(self, emojiList):
@@ -31,7 +34,7 @@ class createEmojiList:
 
 class createLavalink:
     def __init__(self):
-        with open("/home/Nyanoh-Snake/configuration.json", "r") as config:
+        with open(ROOT_DIR+"/configuration.json", "r") as config:
             data = json.load(config)
 
         self.host = data["lavalinkHost"]
@@ -46,7 +49,7 @@ class Greetings(commands.Cog):
         self.bot = bot
         self._last_member = None
 
-with open("/home/Nyanoh-Snake/configuration.json", "r") as config:
+with open(ROOT_DIR+"/configuration.json", "r") as config:
     data = json.load(config)
     token = data["token"]
     prefix = data["prefix"]
@@ -57,7 +60,7 @@ with open("/home/Nyanoh-Snake/configuration.json", "r") as config:
     dblToken = data["dblToken"]
 
 
-with open("/home/Nyanoh-Snake/emojis.json", "r") as emojiList:
+with open(ROOT_DIR+"/emojis.json", "r") as emojiList:
     emojiList = json.load(emojiList)
     emojiList = {
         "YoutubeLogo": emojiList["YouTubeLogo"],
@@ -93,6 +96,7 @@ bot.remove_command("help") # To create a personal help command
 # Database
 bot.dbConnection = DBConnection()
 
+
 async def status_task():
     while True:
         serverCount = len(bot.guilds)
@@ -113,7 +117,7 @@ async def status_task():
 
 # Load cogs
 if __name__ == '__main__':
-    for filename in os.listdir("/home/Nyanoh-Snake/Cogs"):
+    for filename in os.listdir(ROOT_DIR+"/Cogs"):
         if filename.endswith(".py"):
             bot.load_extension(f"Cogs.{filename[:-3]}")
 
