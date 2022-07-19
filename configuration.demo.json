@@ -1,0 +1,27 @@
+{
+    
+    "token":"OTA2MDcwNTM4Mjc4MDQzNjY4.GFO7SU.2jhqSuzHigXhratZSptLT0qvlIwiXCUpoRA94I",
+    
+    "prefix": "!",
+    
+    "playlistLimit": "200",
+    "sponsorblock": true,
+    
+    "spotifyClientId": "",
+    "spotifyClientSecret": "",
+
+    "dblToken": "",
+
+    "lavalinkHost": "localhost",
+    "lavalinkPort": 2333,
+    "lavalinkRestUri": "http://localhost:2333",
+    "lavalinkPassword": "youshallnotpass",
+    "lavalinkIdentifier": "Nyanoh",
+    "lavalinkRegion": "jp",
+
+    "MySQLHost": "localhost",
+    "MySQLPort": 3306,
+    "MySQLLogin": "root",
+    "MySQLPasword": "root",
+    "MySQLDatabase": "NyaMusic"
+}
