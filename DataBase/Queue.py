@@ -421,3 +421,30 @@ class DBQueue:
         mydb.commit()
         mycursor.close()
         mydb.close()
+    
+    def unrole_add(self, server, roleid):
+        """Add a song in the queue"""
+        t1 = datetime.datetime.now()
+        # print("DB QUEUE add", t1)
+        mydb = self.dbConnection.getConnection()
+        mycursor = mydb.cursor()
+        query = f"INSERT INTO `unrole-channel` (`role_id`, `server_id`, `jikan`) VALUES (%s, %s, %s);"
+        val = (str(roleid), str(server), str(t1))
+        mycursor.execute(query, val)
+        mydb.commit()
+        mycursor.close()
+        mydb.close()
+    def role_search(self,serverid):
+        #Role and Server ID is reverse here
+        """Return the content of a server's queue"""
+        mydb = self.dbConnection.getConnection()
+        mycursor = mydb.cursor()
+        query = f"SELECT server_id FROM `role-channel` WHERE `role_id`= '"+ str(serverid) +"' LIMIT 1; "
+        
+        mycursor.execute(query)
+        result = mycursor.fetchall()
+        mycursor.close()
+        mydb.close()
+        if len(result) == 0:
+            return None
+        return result

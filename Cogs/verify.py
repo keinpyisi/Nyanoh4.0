@@ -93,6 +93,27 @@ class CogQueue(commands.Cog):
         DBQueue(self.bot.dbConnection).role_add(str(roleid),str(ctx.guild.id))
         msg = 'Verify Role: {} , Has been Setup'.format(args[0])
         await ctx.send(msg,allowed_mentions=discord.AllowedMentions.all())
+    @commands.command(name = "set-unrole",
+                    aliases=["nrole"],
+                    usage="",
+                    description = "Set Unverified Role ")
+    @commands.guild_only()
+    @commands.cooldown(1, 5, commands.BucketType.member)
+    async def unrole_add(self, ctx,*args):
+        if args is None: return
+
+        # author = ctx.message.author
+        # user_name = author.name
+        # DBQueue(self.bot.dbConnection).verify_add(ctx.guild.id,ctx.message.author.id,user_name ) 
+        
+        roleid = re.findall("\d+", str(args[0]))[0]
+       
+        
+       
+        
+        DBQueue(self.bot.dbConnection).unrole_add(str(roleid),str(ctx.guild.id))
+        msg = 'Verify Role: {} , Has been Setup'.format(args[0])
+        await ctx.send(msg,allowed_mentions=discord.AllowedMentions.all())
 
 def setup(bot):
     bot.add_cog(CogQueue(bot))
