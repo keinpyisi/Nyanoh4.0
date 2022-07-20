@@ -20,8 +20,12 @@ class CogStats(commands.Cog):
     @commands.guild_only()
     @commands.cooldown(1, 5, commands.BucketType.member)
     async def stats(self, ctx):
-
-        serverCount = len(self.bot.guilds)
+        count=0
+        for server  in self.bot.guilds:
+                 count+=1
+                 
+        
+        serverCount = count
         try:
             userCount = sum(i.member_count for i in self.bot.guilds)
         except:
