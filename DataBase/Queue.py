@@ -181,7 +181,7 @@ class DBQueue:
         """Return the size of a server's queue playing track"""
         mydb = self.dbConnection.getConnection()
         mycursor = mydb.cursor()
-        query = f"SELECT COUNT(*) FROM queue WHERE isPlaying= true;"
+        query = f"select count(distinct least(server, requester) , greatest(server, requester))as server from queue WHERE isPlaying= true;"
         mycursor.execute(query)
         result = mycursor.fetchall()
         mycursor.close()
@@ -447,4 +447,14 @@ class DBQueue:
         mydb.close()
         if len(result) == 0:
             return None
+        return result
+    def countServerPlayingItems(self):
+        """Return the size of a server's queue playing track"""
+        mydb = self.dbConnection.getConnection()
+        mycursor = mydb.cursor()
+        query = f"select distinct least(server, requester) as server , greatest(server, requester) as requester from queue WHERE isPlaying= true;"
+        mycursor.execute(query)
+        result = mycursor.fetchall()
+        mycursor.close()
+        mydb.close()
         return result
