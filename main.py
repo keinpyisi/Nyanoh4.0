@@ -173,7 +173,7 @@ async def on_message(message):
     content=message.content
     userid=message.author.id
     data=DBQueue(bot.dbConnection).capcha_search(str(content),userid )
-    msg="Wrong Capcha nya~"
+    msg="Wrong Capcha ...."
     if content.startswith(prefix):
          if prefix+":" in content:
             pass
@@ -185,7 +185,7 @@ async def on_message(message):
             #capchaverify
             if(len(data)>0):
                 DBQueue(bot.dbConnection).capchaverify(str(content),userid )
-                msg="Capcha Verified. Please sent !nyanoh in specfic server"
+                msg="Capcha Verified. Please sent >fan in specfic server"
 
             await message.channel.send(msg)
     else:

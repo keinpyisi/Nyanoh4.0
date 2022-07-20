@@ -10,7 +10,8 @@ from DataBase.Queue import DBQueue
 from DataBase.Server import DBServer
 from DataBase.Skip import DBSkip
 
-
+import os
+ROOT_DIR = os.path.dirname(os.path.abspath("main.py"))
 class Track(wavelink.Track):
     """Wavelink Track object with a requester attribute."""
 
@@ -29,7 +30,7 @@ class CogLavalinkEvents(commands.Cog, wavelink.WavelinkMixin):
     @wavelink.WavelinkMixin.listener('on_track_start')
     async def on_track_start(self, node: wavelink.Node, payload):
 
-        with open("/home/Nyanoh-Snake/configuration.json", "r") as config:
+        with open(ROOT_DIR+"/configuration.json", "r") as config:
             data = json.load(config)
             sponsorblock = data["sponsorblock"]
             
