@@ -108,10 +108,10 @@ class CogJoinLeave(commands.Cog):
 
         await ctx.channel.send(f"{ctx.author.mention} Disconnected from **`{channel.name}`**!")
         
-    @commands.command(name = "nya",
-                    aliases=["ny"],
+    @commands.command(name = "miku",
+                    aliases=["mk"],
                     usage="",
-                    description = "Add the Nya in your voice channel")
+                    description = "Add the Miku in your voice channel")
     @commands.guild_only()
     @commands.cooldown(1, 5, commands.BucketType.member)
     async def nya(self, ctx):

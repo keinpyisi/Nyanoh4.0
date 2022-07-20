@@ -35,13 +35,13 @@ class CogQueue(commands.Cog):
     
     
 
-    @commands.command(name = "nyanoh",
-                    aliases=["vnya"],
+    @commands.command(name = "fan",
+                    aliases=["vfan"],
                     usage="",
                     description = "Verify Now")
     @commands.guild_only()
     @commands.cooldown(1, 5, commands.BucketType.member)
-    async def nyanoh(self, ctx):
+    async def fan(self, ctx):
         # if args is None: return
         print("HERE?")
         author = ctx.message.author
