@@ -6,7 +6,7 @@ from DataBase.Queue import DBQueue
 class server(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
+    
 
     # @commands.command(name = "support",
     #                 usage="",
@@ -22,15 +22,22 @@ class server(commands.Cog):
                     description = "Server List")
     @commands.cooldown(1, 2, commands.BucketType.member)
     async def listservers(self, ctx):
-        embed = discord.Embed(title=f"__**{self.bot.user.name.upper()} Server Lists**__", description="List of all Servers", color=0xF8AA2A)
         count=0
+            
         for server  in self.bot.guilds:
-                 count+=1
-                 embed.add_field(name="**{}.{}**".format(count,server.name), value="{}".format(server.id), inline=True)
+                    embed = discord.Embed(title=f"__**{self.bot.user.name.upper()} Server Lists**__", description="List of all Servers", color=0xF8AA2A)
+       
+                    
+                    count+=1
+                    embed.add_field(name="**{}.{}**".format(count,server.name), value="{}".format(server.id), inline=True)
+                            
+                    
+                        
+                    embed.set_footer(text="Bot Created by #htut#0854, Modified By #Krul#6348")
+                    await ctx.channel.send(embed=embed)
         
             
-        embed.set_footer(text="Bot Created by #htut#0854, Modified By #Krul#6348")
-        await ctx.channel.send(embed=embed)
+        
         
 		
 
