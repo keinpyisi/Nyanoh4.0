@@ -324,13 +324,13 @@ async def on_message(message):
         else:
             try:
                 
-                
-                await message.channel.send(str(start_chat(str(content))))
+                raise Exception('I know Python!')
+                # await message.channel.send(str(start_chat(str(content))))
             except Exception as e:
                 print(e)
                 await message.channel.send("If you are verifying, Wrong Captcha nya~")
 
-                await message.channel.send("Please Type in Myanmar Language If you want to talk to me Nya~")
+                #await message.channel.send("Please Type in Myanmar Language If you want to talk to me Nya~")
 
                 
                 
