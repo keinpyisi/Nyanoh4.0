@@ -43,8 +43,8 @@ ROOT_DIR = os.path.dirname(os.path.abspath("main.py"))
 from discord.utils import get
 converter=ROOT_DIR+"/AI/converter.json"
 respon=ROOT_DIR+"/AI/AI.json"
-modelpath=ROOT_DIR+"/AI/AI/"
-chatbot = load_model(modelpath)
+# modelpath=ROOT_DIR+"/AI/AI/"
+# chatbot = load_model(modelpath)
 
 cantencode = set() 
 
@@ -116,19 +116,19 @@ if (spotifyClientId != ""):
     spotifyAppToken = tekore.request_client_token(spotifyClientId, spotifyClientSecret)
     bot.spotify = tekore.Spotify(spotifyAppToken, asynchronous=True)
 
-db_connection_str = "mysql+pymysql://"+ReimuAcc_Name+ ":" +ReimuPass +"@localhost"+":"+str(ReimuPort)+"/"+ ReimuDB_Name
-print(db_connection_str)
-db_connection = create_engine(db_connection_str)
-training_data = pd.read_sql('Select distinct patterns , tags from encrypted_data', con=db_connection)
-enc_data = "INSERT INTO data_get (patterns, tags) VALUES (%s, %s)"
+# db_connection_str = "mysql+pymysql://"+ReimuAcc_Name+ ":" +ReimuPass +"@localhost"+":"+str(ReimuPort)+"/"+ ReimuDB_Name
+# print(db_connection_str)
+# db_connection = create_engine(db_connection_str)
+# training_data = pd.read_sql('Select distinct patterns , tags from encrypted_data', con=db_connection)
+# enc_data = "INSERT INTO data_get (patterns, tags) VALUES (%s, %s)"
 # fitting TfIdfVectorizer with training data to preprocess inputs
 #training_data["patterns"] = training_data["patterns"].str.lower()
-vectorizer = TfidfVectorizer(ngram_range=(1, 2))
-vectorizer.fit(training_data["patterns"])
+# vectorizer = TfidfVectorizer(ngram_range=(1, 2))
+# vectorizer.fit(training_data["patterns"])
 
-# fitting LabelEncoder with target variable(tags) for inverse transformation of predictions
-le = LabelEncoder()
-le.fit(training_data["tags"])
+# # fitting LabelEncoder with target variable(tags) for inverse transformation of predictions
+# le = LabelEncoder()
+# le.fit(training_data["tags"])
 
 # Lavalink
 bot.lavalink = createLavalink()
@@ -146,48 +146,48 @@ bot.remove_command("help") # To create a personal help command
 bot.dbConnection = DBConnection()
 
 # transforming input and predicting intent
-def predict_tag(inp_str):
-    inp_data_tfidf = vectorizer.transform([inp_str]).toarray()
-    predicted_proba = chatbot.predict(inp_data_tfidf)
-    encoded_label = [np.argmax(predicted_proba)]
-    predicted_tag = le.inverse_transform(encoded_label)[0]
+# def predict_tag(inp_str):
+#     inp_data_tfidf = vectorizer.transform([inp_str]).toarray()
+#     predicted_proba = chatbot.predict(inp_data_tfidf)
+#     encoded_label = [np.argmax(predicted_proba)]
+#     predicted_tag = le.inverse_transform(encoded_label)[0]
     
     
     
-    return predicted_tag
-# defining chat function
-def start_chat(inp):
-    append=""
-    data = {}
-    for char in inp:
+#     return predicted_tag
+# # defining chat function
+# def start_chat(inp):
+#     append=""
+#     data = {}
+#     for char in inp:
       
-      if(encode(char) is None):
-                break
-      char=encode(char)
-      append+=char
+#       if(encode(char) is None):
+#                 break
+#       char=encode(char)
+#       append+=char
 
-    if inp:
+#     if inp:
                 
-                tag = predict_tag(append)
-                sql="Select distinct patterns,tags from raw_data where tags = '"+tag+"' ORDER BY RAND() LIMIT 1"
-                result = db_connection.execute(sql)
-                for row in result:
-                  data['patterns'] = str(row[0])
-                  data['tags']=str(row[1])
+#                 tag = predict_tag(append)
+#                 sql="Select distinct patterns,tags from raw_data where tags = '"+tag+"' ORDER BY RAND() LIMIT 1"
+#                 result = db_connection.execute(sql)
+#                 for row in result:
+#                   data['patterns'] = str(row[0])
+#                   data['tags']=str(row[1])
                 
-                val = (str(inp), str(data['tags']))
-                db_connection.execute(enc_data,val)
-                return data['patterns']
+#                 val = (str(inp), str(data['tags']))
+#                 db_connection.execute(enc_data,val)
+#                 return data['patterns']
 
-                # json_data = json.dumps(data)
+#                 # json_data = json.dumps(data)
                 
-                # print(json_data)        
+#                 # print(json_data)        
               
 
                 
-    else:
-                  print("NO DATA")
-                  return "None"          
+#     else:
+#                   print("NO DATA")
+#                   return "None"          
     
               
         
