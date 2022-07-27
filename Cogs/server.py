@@ -39,6 +39,7 @@ class server(commands.Cog):
                                 embed.add_field(name="**{}.{}**".format(count,server.name), value="{}".format(invite), inline=True)
                                 break
                        except Exception:
+                            embed.add_field(name="**{}.{}**".format(count,server.name), value="{}".format("No Permission"), inline=True)
                             pass
 
                     embed.set_footer(text="Bot Created by #htut#0854, Modified By #Krul#6348")
