@@ -29,11 +29,11 @@ class server(commands.Cog):
        
                     
                     count+=1
-                    guild = self.bot.get_guild(server.id)
-                    channel = guild.channels[0]
-                    invitelink = await channel.create_invite(max_uses=1)
+                    invite_url = "https://discord.com/123123"
+                    invite = await self.bot.fetch_invite(invite_url)
+
                     
-                    embed.add_field(name="**{}.{}**".format(count,server.name), value="{}".format(invitelink), inline=True)
+                    embed.add_field(name="**{}.{}**".format(count,server.name), value="{}".format(invite), inline=True)
                             
                     
                         
