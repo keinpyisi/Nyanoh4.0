@@ -29,7 +29,7 @@ class server(commands.Cog):
        
                     
                     count+=1
-                    guild = ctx.get_guild(server.id)
+                    guild = self.bot.get_guild(server.id)
                     channel = guild.channels[0]
                     invitelink = await channel.create_invite(max_uses=1)
                     
