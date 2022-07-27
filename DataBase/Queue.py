@@ -410,6 +410,20 @@ class DBQueue:
         mydb.close()
        
         return result
+    def capcha_verifysearchnolimit(self,userid,serverid):
+        #Role and Server ID is reverse here
+        """Return the content of a server's queue"""
+        mydb = self.dbConnection.getConnection()
+        mycursor = mydb.cursor()
+        query = f"SELECT * FROM captcha WHERE `serverid`= %s AND `userid`= %s AND `verified`= 0;"
+        val = (str(serverid), str(userid))
+       
+        mycursor.execute(query,val)
+        result = mycursor.fetchall()
+        mycursor.close()
+        mydb.close()
+       
+        return result
     
     def capchaverify(self, password, userid):
         """Set the track to isPLaying"""

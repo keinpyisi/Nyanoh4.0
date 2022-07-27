@@ -148,7 +148,7 @@ class CogQueue(commands.Cog):
             
             
            
-            capchacheck=DBQueue(self.bot.dbConnection).capcha_verifysearch(userid,ctx.guild.id )
+            capchacheck=DBQueue(self.bot.dbConnection).capcha_verifysearchnolimit(userid,ctx.guild.id )
             if not capchacheck:
                embed.add_field(name="**{}**".format("No Capcha Data"), value="{}".format("No Data"), inline=True)
             else:
