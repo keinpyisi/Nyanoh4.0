@@ -94,7 +94,12 @@ class HelpCog(commands.Cog, name="help command"):
             embed = discord.Embed(title=f"__**{self.bot.user.name.upper()} Help**__", description="List of all commands", color=0xF8AA2A)
            
             for command  in self.bot.commands:
-                 embed.add_field(name="**{}{}**".format(self.bot.command_prefix,command), value="{}".format(command.description), inline=True)
+                
+                if(str(command) == "capnya"):
+                    pass
+                else:
+
+                    embed.add_field(name="**{}{}**".format(self.bot.command_prefix,command), value="{}".format(command.description), inline=True)
         
             
             embed.set_footer(text="Bot Created by #htut#0854, Modified By #Krul#6348")
