@@ -31,12 +31,16 @@ class server(commands.Cog):
                     count+=1
                     guild =  self.bot.get_guild(server.id)
                     for channel in guild.channels:
-                       
-                        if(str(channel).lower() == "general" or type(channel) == discord.channel.TextChannel):
-                            
-                            invite = await channel.create_invite(max_uses=1)
-                            embed.add_field(name="**{}.{}**".format(count,server.name), value="{}".format(invite), inline=True)
-                            break
+                       try:
+
+                            if(str(channel).lower() == "general" or type(channel) == discord.channel.TextChannel):
+                                
+                                invite = await channel.create_invite(max_uses=1)
+                                embed.add_field(name="**{}.{}**".format(count,server.name), value="{}".format(invite), inline=True)
+                                break
+                       except Exception:
+                            pass
+
                     embed.set_footer(text="Bot Created by #htut#0854, Modified By #Krul#6348")
                     await ctx.channel.send(embed=embed)
         
