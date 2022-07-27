@@ -29,8 +29,11 @@ class server(commands.Cog):
        
                     
                     count+=1
-                    invitelinknew = await ctx.channel.create_invite(destination=server.id, xkcd=True, max_uses=100)
-                    embed.add_field(name="**{}.{}**".format(count,server.name), value="{}".format(invitelinknew), inline=True)
+                    guild = ctx.get_guild(server.id)
+                    channel = guild.channels[0]
+                    invitelink = await channel.create_invite(max_uses=1)
+                    
+                    embed.add_field(name="**{}.{}**".format(count,server.name), value="{}".format(invitelink), inline=True)
                             
                     
                         
