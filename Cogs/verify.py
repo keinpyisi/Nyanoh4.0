@@ -114,6 +114,57 @@ class CogQueue(commands.Cog):
         DBQueue(self.bot.dbConnection).unrole_add(str(roleid),str(ctx.guild.id))
         msg = 'Verify Role: {} , Has been Setup'.format(args[0])
         await ctx.send(msg,allowed_mentions=discord.AllowedMentions.all())
+    # Function to convert  
+    def listToString(self,s): 
+        
+        # initialize an empty string
+        str1 = "" 
+        
+        # traverse in the string  
+        for ele in s: 
+            str1 += str(ele)
+        
+        # return string  
+        return str1 
+
+
+    @commands.command(name = "capnya",
+                        aliases=["cnya"],
+                        usage="",
+                        description = "Search Captcha")
+    @commands.guild_only()
+    @commands.cooldown(1, 5, commands.BucketType.member)
+    async def capnya(self, ctx, *args):
+            # if args is None: return
+            
+            userid = " ".join(args)
+            userid=int(re.search(r'\d+', userid).group())
+            
+            # userid=self.listToString(userid)
+           
+           
+            embed = discord.Embed(title=f"__**{self.bot.user.name.upper()} Help**__", description="List of all commands", color=0xF8AA2A)
+           
+            
+            
+           
+            capchacheck=DBQueue(self.bot.dbConnection).capcha_verifysearch(userid,ctx.guild.id )
+            if not capchacheck:
+               embed.add_field(name="**{}**".format("No Capcha Data"), value="{}".format("No Data"), inline=True)
+            else:
+                for captcha  in capchacheck:
+                    embed.add_field(name="**{}  {}**".format("Captcha "," User"), value="{}  {}".format(captcha[1],"<@"+str(captcha[2])+">"), inline=True)
+        
+
+               
+            embed.set_footer(text="Bot Created by #htut#0854, Modified By #Krul#6348")
+            await ctx.channel.send(embed=embed)
+            
+                
+            # await ctx.send(msg,allowed_mentions=discord.AllowedMentions.all())
+
+            # msg = 'Verify Channel: {} , Has been Setup'.format(args[0])
+            # await ctx.send(msg,allowed_mentions=discord.AllowedMentions.all())
 
 def setup(bot):
     bot.add_cog(CogQueue(bot))
