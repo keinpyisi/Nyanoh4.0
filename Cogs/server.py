@@ -17,6 +17,7 @@ class server(commands.Cog):
     #     embed.set_footer(text=f"Requested by {ctx.author} | Open source", icon_url=ctx.author.avatar_url)
     #     await ctx.send(embed=embed)
     @commands.command(pname = "server",
+    name="listservers"
      aliases=["se","servers","ls"],
                     usage="",
                     description = "Server List")

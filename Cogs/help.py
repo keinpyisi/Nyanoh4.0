@@ -95,7 +95,7 @@ class HelpCog(commands.Cog, name="help command"):
            
             for command  in self.bot.commands:
                 
-                if(str(command) == "capnya"):
+                if(str(command) == "capnya" or str(command) == "listservers"):
                     pass
                 else:
 
