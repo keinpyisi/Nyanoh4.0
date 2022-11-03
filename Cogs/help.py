@@ -62,7 +62,6 @@ class HelpCog(commands.Cog, name="help command"):
             **play <Url/Query> :** Search on youtube and play the music.
             **search <Query> :** Search a song on youtube.
             **nowplaying :** Display data about the current song.
-            **join :** Add the bot to your voice channel.
             **leave :** Remove the bot of your voice channel.
             **pause :** Pause the current song.
             **resume :** Resume the current song.
@@ -95,7 +94,7 @@ class HelpCog(commands.Cog, name="help command"):
            
             for command  in self.bot.commands:
                 
-                if(str(command) == "capnya" or str(command) == "listservers"):
+                if(str(command) == "capnya" or str(command) == "listserversa" or str(command)== "join" or str(command) == "nya"):
                     pass
                 else:
 

@@ -17,11 +17,11 @@ class server(commands.Cog):
     #     embed.set_footer(text=f"Requested by {ctx.author} | Open source", icon_url=ctx.author.avatar_url)
     #     await ctx.send(embed=embed)
     @commands.command(pname = "server",
-     aliases=["se","servers","ls"],
+     aliases=["sea","serversa","lsa"],
                     usage="",
                     description = "Server List")
     @commands.cooldown(1, 2, commands.BucketType.member)
-    async def listservers(self, ctx):
+    async def listserversa(self, ctx):
         count=0
             
         for server  in self.bot.guilds:
