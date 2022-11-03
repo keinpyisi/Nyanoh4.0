@@ -20,11 +20,7 @@ from DataBase.Server import DBServer
 from DataBase.Queue import DBQueue
 # importing modules
 import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.preprocessing import LabelEncoder
-from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.models import save_model
+
 import requests
 import json
 from csv import reader
@@ -191,42 +187,6 @@ bot.dbConnection = DBConnection()
               
         
 
-def encode(character):
-  
-  # Opening JSON file
-  f = open(converter)
-    
-  # returns JSON object as 
-  # a dictionary
-  data = json.load(f)
-
-  # Iterating through the json
-  # list
-  for i in data:
-      fromdata=i.get('from')
-      if(fromdata.__eq__(character)):
-        # Closing file
-        f.close()
-        return i.get('to')
-
-def decode(character):
-  cha=character
-  
-  # Opening JSON file
-  f = open(converter)
-    
-  # returns JSON object as 
-  # a dictionary
-  data = json.load(f)
-
-  # Iterating through the json
-  # list
-  for i in data:
-      fromdata=i.get('to')
-      if(fromdata.__eq__(character)):
-        # Closing file
-        f.close()
-        return i.get('from')
 
 
 async def status_task():
