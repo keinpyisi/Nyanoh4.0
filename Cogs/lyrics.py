@@ -12,65 +12,71 @@ import re
 import lyricsgenius
 from ytmusicapi import YTMusic
 
+from urllib.request import Request, urlopen
+import requests 
+from requests_html import HTMLSession
+from bs4 import BeautifulSoup
+try:
+    import urlparse
+    from urllib import urlencode
+except: # For Python 3
+    import urllib.parse as urlparse
+    from urllib.parse import urlencode
 
+def parse_results(response):
+    print(response)
+    css_identifier_result = ".GyAeWb"
+    css_identifier_title = "h3"
+    css_identifier_link = ".yuRUbf a"
+    css_identifier_text = ".tF2Cxc"
+    
+    results = response.html.find(css_identifier_result)
 
-GENIUS_API_TOKEN = "_IYvadJRCx6ZwYjmE-v0cQ5qRhRyeUJhoO4o0i0Uc5JVGY6UsPzEIWOtgDApuAC2"
+    output = []
+   
+    for result in results:
+        
+        lyric=result.find('div')[62]
+       
+       
 
-# Get artist object from Genius API
-def request_artist_info(artist_name, page):
-    base_url = 'https://api.genius.com'
-    headers = {'Authorization': 'Bearer ' + GENIUS_API_TOKEN}
-    search_url = base_url + '/search?per_page=10&page=' + str(page)
-    data = {'q': artist_name}
-    response = requests.get(search_url, data=data, headers=headers)
-    return response
-# Get Genius.com song url's from artist object
-def request_song_url(artist_name, song_cap):
-    page = 1
-    songs = []
-    
-    response = request_artist_info(artist_name, page)
-    
-    json = response.json()
+        # item = {
+        #     'title': result.find(css_identifier_title, first=True).text,
+        #     'link': result.find(css_identifier_link, first=True).attrs['href'],
+        #     'text': result.find(css_identifier_text, first=True).text
+        # }
+        
+        output.append(lyric.text)
+        
+    return output
 
-        # Collect up to song_cap song objects from artist
-    song_info = []
-    for hit in json['response']['hits']:
-            if artist_name.lower() in hit['result']['primary_artist']['name'].lower():
-                song_info.append(hit)
-    
-        # Collect song URL's from song objects
-    for song in song_info:
-            if (len(songs) < song_cap):
-                url = song['result']['url']
-                songs.append(url)
-    
-    return songs[0]
-# Scrape lyrics from a Genius.com song URL
-def striphtml(data):
-    p = re.compile(r'<.*?>')
-    return p.sub('', data)
-
-def scrape_song_lyrics(url):
-    print(url)
-    page = requests.get(url)
-    html = BeautifulSoup(page.text, 'html.parser')
-    
-    lyrics = html.find('div', class_='Lyrics__Container-sc-1ynbvzw-6 YYrds')
-    lyrics=striphtml(str(lyrics).replace("<br/>", "\n"))
-    # line=lyrics.splitlines()
-    # print(str(line)+"\n")
+def get_source(url):
   
-    # for data in lyrics:
-    #     print(data)
-    #     data+=data+"\n"
+    try:
+        session = HTMLSession()
+        response = session.get(url)
+        return response
 
-    # #remove identifiers like chorus, verse, etc
-    # lyrics = re.sub(r'[\(\[].*?[\)\]]', '', lyrics)
-    # # #remove empty lines
-    # # lyrics = os.linesep.join([s for s in lyrics.splitlines() if s])  
+    except requests.exceptions.RequestException as e:
+        print(e)
+
+def get_results(query):
     
-    return lyrics
+    
+    response = get_source(query)
+    
+    return response
+# mybytes = urlopen(req).read()
+
+
+# html = mybytes.decode("utf8")
+# data= parse_results(req)
+
+
+
+
+
+
 
 
 class Lyrics(commands.Cog):
@@ -95,30 +101,33 @@ class Lyrics(commands.Cog):
         
         songnametemp=str(player.current)
 
-        ytmusic = YTMusic()
-        search_results = ytmusic.search(songnametemp)
-        artist=search_results[0]['artists'][0]['name']
-        songname=search_results[0]['title']
-        songname=re.sub("\(.*?\)","()",songname)
-        songname=re.sub("\(.*?\)", "", songname)
-        songname=songname.replace(",", "")
         
         
-        if songname[-1] == ' ':
-            songname=songname[:-1]
+        if songnametemp[-1] == ' ':
+            songnametemp=songnametemp[:-1]
 
+        url = "https://www.google.com/search"
+        params = {'q':songnametemp,'sclient':'gws-wiz-serp'}
+
+
+        url_parts = list(urlparse.urlparse(url))
+        query = dict(urlparse.parse_qsl(url_parts[4]))
+        query.update(params)
+
+        url_parts[4] = urlencode(query)
+
+        print(urlparse.urlunparse(url_parts))
+
+
+     
         
-        artist=artist.replace(" ", "-").lower()
-        artist=artist.join(word[0].upper() + word[1:] for word in artist.split())
-       
-        songname=songname.replace(" ", "-").lower()
-        url="https://genius.com/"+artist+"-"+songname+"-lyrics"
+        lyrics=parse_results(get_results(urlparse.urlunparse(url_parts)))
+        # print(len(data))
+        # for text in data:
+        #     print(text)
+        # print(url)
         
-        # https://genius.com/Kizuna-ai-hai-domo-english-lyrics
-        lyrics= scrape_song_lyrics(url)
-        print(url)
-        
-        embed=discord.Embed(title="Lyrics of :", description=f"**[{search_results[0]['artists'][0]['name']}]({search_results[0]['title']})**", color=0xFFD1DC)
+        embed=discord.Embed(title="Lyrics of :", description=f"**[{songnametemp}]**", color=0xFFD1DC)
         
         embed.add_field(name="Lyrics :", value=lyrics, inline=True)
         
