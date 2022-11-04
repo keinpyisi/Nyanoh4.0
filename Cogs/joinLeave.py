@@ -171,58 +171,58 @@ class CogJoinLeave(commands.Cog):
     @commands.guild_only()
     @commands.cooldown(1, 5, commands.BucketType.member)
     async def join(self, ctx):
-        # if not await Check().userInVoiceChannel(ctx, self.bot): return 
-        # if not await Check().botNotInVoiceChannel(ctx, self.bot): return 
+        if not await Check().userInVoiceChannel(ctx, self.bot): return 
+        if not await Check().botNotInVoiceChannel(ctx, self.bot): return 
 
-        # channel = ctx.author.voice.channel
+        channel = ctx.author.voice.channel
         
-        # player = self.bot.wavelink.get_player(ctx.guild.id)
-        # await player.connect(channel.id)
+        player = self.bot.wavelink.get_player(ctx.guild.id)
+        await player.connect(channel.id)
         
 
-        # Clear all the queue
-        DBQueue(self.bot.dbConnection).clear(ctx.guild.id)
-        # Clear all server music parameters
-        DBServer(self.bot.dbConnection).clearMusicParameters(ctx.guild.id, False, False)
-        # ROOT_DIR = str(Path(__file__).parent.parent) # This is your Project Root
+        # # Clear all the queue
+        # DBQueue(self.bot.dbConnection).clear(ctx.guild.id)
+        # # Clear all server music parameters
+        # DBServer(self.bot.dbConnection).clearMusicParameters(ctx.guild.id, False, False)
+        # # ROOT_DIR = str(Path(__file__).parent.parent) # This is your Project Root
         
         
-        # audio_source = discord.FFmpegPCMAudio("/Users/keinpyisi/Documents/php8/Music-Discord-Bot/Assets/sounds_Smol_nyanoh.wav")
-        # if not await Check().botIsPlaying(ctx, self.bot): await player.play(audio_source)
+        # # audio_source = discord.FFmpegPCMAudio("/Users/keinpyisi/Documents/php8/Music-Discord-Bot/Assets/sounds_Smol_nyanoh.wav")
+        # # if not await Check().botIsPlaying(ctx, self.bot): await player.play(audio_source)
         
-        # # await ctx.send(f"{ctx.author.mention} Connected in **`{channel.name}`**!")
-        try :
-            channel = ctx.message.author.voice.channel
-            await channel.connect()
-            #server = ctx.message.guild
-            # voice_channel = server.voice_client
+        # # # await ctx.send(f"{ctx.author.mention} Connected in **`{channel.name}`**!")
+        # try :
+        #     channel = ctx.message.author.voice.channel
+        #     await channel.connect()
+        #     #server = ctx.message.guild
+        #     # voice_channel = server.voice_client
 
-            # async with ctx.typing():
-            #     filename = await YTDLSource.from_url("https://github.com/keinpyisi/Database/raw/main/sounds_Smol_nyanoh.wav", loop=self.bot.loop)
-            #     voice_channel.play(discord.FFmpegPCMAudio(executable="ffmpeg", source=filename), after = lambda e: asyncio.run_coroutine_threadsafe(voice_channel.disconnect(), self.bot.loop))
-            #     # print(voice_channel.is_playing())
-            #     # while voice_channel.is_playing():
-            #     #     if(voice_channel.is_playing()==False):
+        #     # async with ctx.typing():
+        #     #     filename = await YTDLSource.from_url("https://github.com/keinpyisi/Database/raw/main/sounds_Smol_nyanoh.wav", loop=self.bot.loop)
+        #     #     voice_channel.play(discord.FFmpegPCMAudio(executable="ffmpeg", source=filename), after = lambda e: asyncio.run_coroutine_threadsafe(voice_channel.disconnect(), self.bot.loop))
+        #     #     # print(voice_channel.is_playing())
+        #     #     # while voice_channel.is_playing():
+        #     #     #     if(voice_channel.is_playing()==False):
 
-            #     #         print(False)
-            #     # player = self.bot.wavelink.get_player(ctx.guild.id)
-            #     # await player.connect(channel.id)
-            #     # channel = ctx.author.voice.channel
+        #     #     #         print(False)
+        #     #     # player = self.bot.wavelink.get_player(ctx.guild.id)
+        #     #     # await player.connect(channel.id)
+        #     #     # channel = ctx.author.voice.channel
         
            
 
-            #     # Clear all the queue
-            # DBQueue(self.bot.dbConnection).clear(ctx.guild.id)
-            #     # Clear all server music parameters
-            # DBServer(self.bot.dbConnection).clearMusicParameters(ctx.guild.id, False, False)
+        #     #     # Clear all the queue
+        #     # DBQueue(self.bot.dbConnection).clear(ctx.guild.id)
+        #     #     # Clear all server music parameters
+        #     # DBServer(self.bot.dbConnection).clearMusicParameters(ctx.guild.id, False, False)
  
                
                 
                 
                  
             
-        except Exception as e:
-            await ctx.send(e)
+        # except Exception as e:
+        #     await ctx.send(e)
         
 
 def setup(bot):

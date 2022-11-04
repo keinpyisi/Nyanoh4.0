@@ -196,6 +196,8 @@ bot.dbConnection = DBConnection()
 async def status_task():
     count=1
     while True:
+        if(count>10000):
+            count=0
         print(datetime.now())
         try:
             for guild in bot.guilds:
