@@ -99,8 +99,8 @@ async def addTrack(self, ctx, tracks):
             DBQueue(self.bot.dbConnection).add(ctx.guild.id, True, requester, ctx.channel.id, track.uri, track.title, track.duration, 1) # Add to the DB
             # Play the track
             await playTrack(self, ctx, player, track, requester)
-            if not player.is_playing:
-                    print("GO WENT GONE")
-                    await player.destroy()
-                    DBQueue(self.bot.dbConnection).clear(ctx.guild.id)
-                    DBServer(self.bot.dbConnection).clearMusicParameters(ctx.guild.id, False, False)
+            # if not player.is_playing:
+            #         print("GO WENT GONE")
+            #         await player.destroy()
+            #         DBQueue(self.bot.dbConnection).clear(ctx.guild.id)
+            #         DBServer(self.bot.dbConnection).clearMusicParameters(ctx.guild.id, False, False)

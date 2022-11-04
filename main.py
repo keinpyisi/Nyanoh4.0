@@ -34,6 +34,8 @@ import numpy as np
 from tensorflow.keras.models import load_model
 import random
 import os
+from datetime import datetime
+from threading import Timer
 
 ROOT_DIR = os.path.dirname(os.path.abspath("main.py"))
 from discord.utils import get
@@ -187,15 +189,41 @@ bot.dbConnection = DBConnection()
               
         
 
+    
+        
 
 
 async def status_task():
+    count=1
     while True:
+        print(datetime.now())
+        try:
+            for guild in bot.guilds:
+                player = bot.wavelink.get_player(guild.id)
+                if player.is_connected:
+                    print("Player Conected ")
+                    if player.is_playing:
+                        print("Player Playing ")
+                        pass
+                    else:
+                        print("Player Not Playing ")
+                        if(count%20==0):
+                            await player.destroy()
+                            await player.disconnect()
+
+                        print("Player Not Playing HELPPP" + str(count))
+                    pass
+                else:
+                    print("Player Not Conected ")
+                    pass
+                    
+        except:
+            print("PLAYER NULL")
         serverCount = len(bot.guilds)
         data=[]        
         currentTrack = DBQueue(bot.dbConnection).getAlltSong()
         if(currentTrack is not None):
-            data.append(currentTrack[0][0])
+                data.append(currentTrack[0][0])
         data.append("In "+str(serverCount)+" Servers")
         data.append("{}help for Help.".format(prefix))
         data.append("Made By htut#0854")
@@ -203,9 +231,12 @@ async def status_task():
         data.append("KonNyaro")
         ran=random.choice(data)
         await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name =str(ran))) 
-        await asyncio.sleep(10)
+        await asyncio.sleep(5)
+        count+=1
+
         
-    
+
+#timer.cancel() # cancels the timer, but not the job, if it's already started    
 
 # Load cogs
 if __name__ == '__main__':
@@ -224,7 +255,9 @@ async def on_ready():
         if guild.id not in serversId:
             DBServer(bot.dbConnection).add(guild.id, "?", False, False, "")
             print(f"* {guild.name} ({guild.id}) added")
-    bot.loop.create_task(status_task())
+    await status_task()
+    
+    
     print("----------------------------")
     print(f'We have logged in as {bot.user}')
     print(discord.__version__)

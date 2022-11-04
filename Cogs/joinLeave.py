@@ -194,27 +194,27 @@ class CogJoinLeave(commands.Cog):
         try :
             channel = ctx.message.author.voice.channel
             await channel.connect()
-            server = ctx.message.guild
-            voice_channel = server.voice_client
+            #server = ctx.message.guild
+            # voice_channel = server.voice_client
 
-            async with ctx.typing():
-                filename = await YTDLSource.from_url("https://github.com/keinpyisi/Database/raw/main/sounds_Smol_nyanoh.wav", loop=self.bot.loop)
-                voice_channel.play(discord.FFmpegPCMAudio(executable="ffmpeg", source=filename), after = lambda e: asyncio.run_coroutine_threadsafe(voice_channel.disconnect(), self.bot.loop))
-                # print(voice_channel.is_playing())
-                # while voice_channel.is_playing():
-                #     if(voice_channel.is_playing()==False):
+            # async with ctx.typing():
+            #     filename = await YTDLSource.from_url("https://github.com/keinpyisi/Database/raw/main/sounds_Smol_nyanoh.wav", loop=self.bot.loop)
+            #     voice_channel.play(discord.FFmpegPCMAudio(executable="ffmpeg", source=filename), after = lambda e: asyncio.run_coroutine_threadsafe(voice_channel.disconnect(), self.bot.loop))
+            #     # print(voice_channel.is_playing())
+            #     # while voice_channel.is_playing():
+            #     #     if(voice_channel.is_playing()==False):
 
-                #         print(False)
-                # player = self.bot.wavelink.get_player(ctx.guild.id)
-                # await player.connect(channel.id)
-                # channel = ctx.author.voice.channel
+            #     #         print(False)
+            #     # player = self.bot.wavelink.get_player(ctx.guild.id)
+            #     # await player.connect(channel.id)
+            #     # channel = ctx.author.voice.channel
         
            
 
-                # Clear all the queue
-            DBQueue(self.bot.dbConnection).clear(ctx.guild.id)
-                # Clear all server music parameters
-            DBServer(self.bot.dbConnection).clearMusicParameters(ctx.guild.id, False, False)
+            #     # Clear all the queue
+            # DBQueue(self.bot.dbConnection).clear(ctx.guild.id)
+            #     # Clear all server music parameters
+            # DBServer(self.bot.dbConnection).clearMusicParameters(ctx.guild.id, False, False)
  
                
                 
