@@ -45,8 +45,8 @@ async def addTrack(self, ctx, tracks):
         # Add the requester
         if player.is_playing:
             queueSize = DBQueue(self.bot.dbConnection).countQueueItems(ctx.guild.id)
-            if queueSize >= 50:
-                return await ctx.channel.send(f"{self.bot.emojiList.false} {ctx.author.mention} You are over the queue limit! The limit of the queue is 50 songs.")
+            # if queueSize >= 50:
+            #     return await ctx.channel.send(f"{self.bot.emojiList.false} {ctx.author.mention} You are over the queue limit! The limit of the queue is 50 songs.")
             index = DBQueue(self.bot.dbConnection).getFutureIndex(ctx.guild.id)
             if index is not None:
                 index += 1
