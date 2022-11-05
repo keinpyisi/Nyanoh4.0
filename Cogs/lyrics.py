@@ -53,9 +53,11 @@ def parse_results(response):
 def get_source(url):
   
     try:
-        response=requests.get(url, headers = {'User-agent': 'your bot 0.1'})
-        # session = HTMLSession()
-        # response = session.get(url)
+        # response=requests.get(url, headers = {'User-agent': 'your bot 0.1'})
+        session = HTMLSession()
+        headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+        session.headers.update(headers)
+        response = session.get(url)
         return response
 
     except requests.exceptions.RequestException as e:
