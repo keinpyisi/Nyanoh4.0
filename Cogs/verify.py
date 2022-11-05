@@ -16,7 +16,7 @@ class CogQueue(commands.Cog):
                     usage="",
                     description = "Set Verify Channel")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def channel_add(self, ctx,*args):
         if args is None: return
 
@@ -40,7 +40,7 @@ class CogQueue(commands.Cog):
                     usage="",
                     description = "Verify Now")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def nyanoh(self, ctx):
         # if args is None: return
         print("HERE?")
@@ -77,7 +77,7 @@ class CogQueue(commands.Cog):
                     usage="",
                     description = "Set Role ")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def role_add(self, ctx,*args):
         if args is None: return
 
@@ -98,7 +98,7 @@ class CogQueue(commands.Cog):
                     usage="",
                     description = "Set Unverified Role ")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def unrole_add(self, ctx,*args):
         if args is None: return
 
@@ -133,7 +133,7 @@ class CogQueue(commands.Cog):
                         usage="",
                         description = "Search Captcha")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def capnya(self, ctx, *args):
             # if args is None: return
             

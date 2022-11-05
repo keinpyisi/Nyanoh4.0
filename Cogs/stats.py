@@ -18,7 +18,7 @@ class CogStats(commands.Cog):
                     usage="",
                     description = "Display the bot's stats")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def stats(self, ctx):
         count=0
         for server  in self.bot.guilds:

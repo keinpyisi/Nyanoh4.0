@@ -16,7 +16,7 @@ class CogRemoveRemoverange(commands.Cog):
                     usage="<Index>",
                     description = "Remove the song with its index.")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def remove(self, ctx, index):
         
         if not await Check().userInVoiceChannel(ctx, self.bot): return 

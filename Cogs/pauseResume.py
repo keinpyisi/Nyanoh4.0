@@ -13,7 +13,7 @@ class CogPauseResume(commands.Cog):
                     aliases=["r"],
                     description = "Resume the song.")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def resume(self, ctx):
 
         if not await Check().userInVoiceChannel(ctx, self.bot): return 
@@ -33,7 +33,7 @@ class CogPauseResume(commands.Cog):
                     usage="",
                     description = "Pause the song.")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def pause(self, ctx):
         
         if not await Check().userInVoiceChannel(ctx, self.bot): return 

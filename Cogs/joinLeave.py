@@ -60,7 +60,7 @@ class CogJoinLeave(commands.Cog):
     #                 usage="",
     #                 description = "Add the bot in your voice channel")
     # @commands.guild_only()
-    # @commands.cooldown(1, 5, commands.BucketType.member)
+    # @commands.cooldown(1, 2, commands.BucketType.member)
     # async def join(self, ctx):
         
     #     if not await Check().userInVoiceChannel(ctx, self.bot): return 
@@ -84,7 +84,7 @@ class CogJoinLeave(commands.Cog):
                     usage="",
                     description = "Leave the bot of your voice channel")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def leave(self, ctx):
 
         if not await Check().botInVoiceChannel(ctx, self.bot): return
@@ -113,7 +113,7 @@ class CogJoinLeave(commands.Cog):
                     usage="",
                     description = "Add the Nya in your voice channel")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def nya(self, ctx):
         
         if not await Check().userInVoiceChannel(ctx, self.bot): return 
@@ -169,7 +169,7 @@ class CogJoinLeave(commands.Cog):
                     usage="",
                     description = "Add the bot in your voice channel")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def join(self, ctx):
         if not await Check().userInVoiceChannel(ctx, self.bot): return 
         if not await Check().botNotInVoiceChannel(ctx, self.bot): return 

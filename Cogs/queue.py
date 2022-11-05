@@ -16,7 +16,7 @@ class CogQueue(commands.Cog):
                     usage="",
                     description = "Display the queue.")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def queue(self, ctx):
 
         isFirstMessage = True

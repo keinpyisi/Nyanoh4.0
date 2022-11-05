@@ -14,7 +14,7 @@ class CogMove(commands.Cog):
                     usage="<IndexFrom> <IndexTo>",
                     description = "Move a song in the queue.")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def move(self, ctx, indexFrom, indexTo):
         
         if not await Check().userInVoiceChannel(ctx, self.bot): return 

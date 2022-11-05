@@ -14,7 +14,7 @@ class CogSearch(commands.Cog):
                     usage="<Query>",
                     description = "Search a song on youtube.")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def search(self, ctx, args):
         tracks = await self.bot.wavelink.get_tracks(f'ytsearch:{args}')
    

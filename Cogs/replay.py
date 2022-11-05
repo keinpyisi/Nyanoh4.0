@@ -17,7 +17,7 @@ class CogReplay(commands.Cog):
                     description = "Replay the current song")
     @commands.guild_only()
     @commands.has_permissions()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def replay(self, ctx):
         
         if not await Check().userInVoiceChannel(ctx, self.bot): return

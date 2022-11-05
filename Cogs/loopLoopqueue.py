@@ -15,7 +15,7 @@ class CogLoopLoopQueue(commands.Cog):
                     usage="",
                     description = "Enable or disable the loop mode.")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def loop(self, ctx):
         
         if not await Check().userInVoiceChannel(ctx, self.bot): return 
@@ -37,7 +37,7 @@ class CogLoopLoopQueue(commands.Cog):
                     usage="",
                     description = "Enable or disable the loop queue mode.")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def loopqueue(self, ctx):
         
         if not await Check().userInVoiceChannel(ctx, self.bot): return 

@@ -15,7 +15,7 @@ class CogAdmin(commands.Cog):
                     description = "Stop the bot.")
     @commands.is_owner()
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def logout(self, ctx):
 
         await ctx.send(f"{self.bot.emojiList.alert} Stoping process...")

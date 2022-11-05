@@ -12,7 +12,7 @@ class CogReaload(commands.Cog):
                     usage="",
                     description = "Reload the current music.")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def skip(self, ctx):
 
         if not await Check().userInVoiceChannel(ctx, self.bot): return 

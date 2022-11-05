@@ -14,7 +14,7 @@ class CogClear(commands.Cog):
                     usage="",
                     description = "Clear the queue.")
     @commands.guild_only()
-    @commands.cooldown(1, 5, commands.BucketType.member)
+    @commands.cooldown(1, 2, commands.BucketType.member)
     async def clear(self, ctx):
 
         if not await Check().userInVoiceChannel(ctx, self.bot): return 
