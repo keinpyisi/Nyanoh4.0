@@ -13,13 +13,13 @@ from discord.ext import commands
 from pathlib import Path
 import string
 # Import the following modules
-from captcha.image import ImageCaptcha
+# from captcha.image import ImageCaptcha
 from Tools.Utils import Utils
 import os
 from DataBase.Server import DBServer
 from DataBase.Queue import DBQueue
 # importing modules
-import pandas as pd
+# import pandas as pd
 
 import requests
 import json
@@ -30,12 +30,13 @@ from sqlalchemy import create_engine
 import sys
 
 
-import numpy as np
-from tensorflow.keras.models import load_model
+# import numpy as np
+# from tensorflow.keras.models import load_model
 import random
 import os
 from datetime import datetime
 from threading import Timer
+from captcha.generator import DefaultGenerator
 
 ROOT_DIR = os.path.dirname(os.path.abspath("main.py"))
 from discord.utils import get
@@ -275,14 +276,14 @@ async def on_member_join(member):
                 
     await member.add_roles(this_role)
     print("HERE")
-    image = ImageCaptcha(width = 280, height = 90)
+    
     
     characters = string.ascii_letters + string.digits
-    password = ''.join(random.choice(characters) for i in range(8))
-    # generate the image of the given text
-    data = image.generate(password)
-    # write the image on the given file and save it
-    image.write(password, 'CAPTCHA.png')
+    password = ''.join(random.choice(characters) for i in range(6))
+    generator = DefaultGenerator()
+    captcha = generator.make_captcha(string=password)
+    captcha.save('CAPTCHA.png')
+
     file = discord.File('CAPTCHA.png', filename="CAPTCHA.png")
 
     message="Please Sent Verification Code -> to me"
